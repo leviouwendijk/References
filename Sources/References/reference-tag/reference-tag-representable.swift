@@ -1,36 +1,40 @@
 public protocol ReferenceTagRepresentable: RawRepresentable where RawValue == String {
-    static var referenceTagNamespace: String { get }
+    static var namespace: String { get }
 
-    var referenceTagLabel: String { get }
+    var label: String { get }
 }
 
 public extension ReferenceTagRepresentable {
-    var referenceTagLabel: String {
-        rawValue.referenceTagDefaultLabel
+    var label: String {
+        rawValue.tagLabel
     }
 
-    var referenceTag: ReferenceTag {
+    var tag: ReferenceTag {
         ReferenceTag(
-            namespace: Self.referenceTagNamespace,
+            namespace: Self.namespace,
             key: rawValue,
-            label: referenceTagLabel
+            label: label
         )
     }
 }
 
 public extension Sequence where Element: ReferenceTagRepresentable {
-    var referenceTags: ReferenceTagSet {
+    var tags: ReferenceTagSet {
         ReferenceTagSet(
-            map(\.referenceTag)
+            map(\.tag)
         )
     }
 }
 
 public extension String {
-    var referenceTagDefaultLabel: String {
+    var tagLabel: String {
         split(separator: "_")
-            .map { part in
-                part.prefix(1).uppercased() + part.dropFirst()
+            .map { part -> String in
+                guard let first = part.first else {
+                    return ""
+                }
+
+                return String(first).uppercased() + String(part.dropFirst())
             }
             .joined(separator: " ")
     }

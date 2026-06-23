@@ -1,27 +1,27 @@
 public struct ReferenceCollection: Sendable {
-    public let sources: [any ReferenceProviding]
+    public let items: [any ReferenceProviding]
 
     public init(
-        _ sources: [any ReferenceProviding]
+        _ items: [any ReferenceProviding]
     ) {
-        self.sources = sources
+        self.items = items
     }
 
     public var count: Int {
-        sources.count
+        items.count
     }
 
     public var deduped: [any ReferenceProviding] {
         var seen: Set<String> = []
 
-        return sources.filter { source in
-            seen.insert(source.public_name_or_id).inserted
+        return items.filter { item in
+            seen.insert(item.public_name_or_id).inserted
         }
     }
 
     public var tags: ReferenceTagSet {
         ReferenceTagSet(
-            sources.flatMap {
+            items.flatMap {
                 $0.tags.values
             }
         )
@@ -30,35 +30,40 @@ public struct ReferenceCollection: Sendable {
     public func section(
         _ section: ReferenceTagSection
     ) -> [any ReferenceProviding] {
-        section.sources(
-            from: sources
+        section.items(
+            from: items
         )
     }
 
     public func tagged(
         _ tag: ReferenceTag
     ) -> [any ReferenceProviding] {
-        sources.filter {
+        items.filter {
             $0.tags.contains(tag)
         }
     }
 
-    public func taggedAny(
-        _ tags: [ReferenceTag]
+    public func matching(
+        tags: [ReferenceTag],
+        match: ReferenceTagMatch = .any
     ) -> [any ReferenceProviding] {
-        sources.filter { source in
-            tags.contains { tag in
-                source.tags.contains(tag)
-            }
+        guard !tags.isEmpty else {
+            return items
         }
-    }
 
-    public func taggedAll(
-        _ tags: [ReferenceTag]
-    ) -> [any ReferenceProviding] {
-        sources.filter { source in
-            tags.allSatisfy { tag in
-                source.tags.contains(tag)
+        switch match {
+        case .any:
+            return items.filter { item in
+                tags.contains { tag in
+                    item.tags.contains(tag)
+                }
+            }
+
+        case .all:
+            return items.filter { item in
+                tags.allSatisfy { tag in
+                    item.tags.contains(tag)
+                }
             }
         }
     }
