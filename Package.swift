@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "References",
+    platforms: [
+        .macOS(.v13),
+    ],
     products: [
         .library(
             name: "References",
@@ -13,9 +16,15 @@ let package = Package(
             ]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/leviouwendijk/Primitives.git", branch: "master"),
+    ],
     targets: [
         .target(
-            name: "References"
+            name: "References",
+            dependencies: [
+                .product(name: "Primitives", package: "Primitives"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

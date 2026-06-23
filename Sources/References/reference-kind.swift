@@ -1,0 +1,15 @@
+public enum ReferenceKind: String, Sendable, Codable, Hashable, CaseIterable {
+    case article
+    case book
+    case book_chapter
+    case preprint
+    case thesis
+    case dissertation
+    case guideline
+    case position_statement
+    case report
+    case dataset
+    case webpage
+    case video
+    case other
+}

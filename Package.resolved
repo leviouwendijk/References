@@ -1,0 +1,15 @@
+{
+  "originHash" : "f45103222a2db31e488374f7f7dd6fe68c9e7eeebc5a7365fa52a8df75dccb44",
+  "pins" : [
+    {
+      "identity" : "primitives",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leviouwendijk/Primitives.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "eb58bcd1ea305d13ff0c0f6fcd03d869a8612802"
+      }
+    }
+  ],
+  "version" : 3
+}
