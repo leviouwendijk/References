@@ -28,4 +28,25 @@ public enum ReferenceReviewEntryKind: String, Sendable, Codable, Hashable, CaseI
             return "Relevance"
         }
     }
+
+    public var dutch: String {
+        switch self {
+        case .overview:
+            return "Overzicht"
+        case .method:
+            return "Methode"
+        case .finding:
+            return "Bevinding"
+        case .limitation:
+            return "Beperking"
+        case .takeaway:
+            return "Kernpunt"
+        case .interpretation:
+            return "Interpretatie"
+        case .caution:
+            return "Voorbehoud"
+        case .relevance:
+            return "Relevantie"
+        }
+    }
 }
