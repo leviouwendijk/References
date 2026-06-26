@@ -12,6 +12,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
     public let channel: ReferenceChannel
     public let abstract: ReferenceTextBlock?
     public let notes: [ReferenceTextBlock]
+    public let reviews: [ReferenceReview]
     public let relations: [ReferenceRelation]
     public let tags: ReferenceTagSet
 
@@ -27,6 +28,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
         channel: ReferenceChannel = .unknown,
         abstract: ReferenceTextBlock? = nil,
         notes: [ReferenceTextBlock] = [],
+        reviews: [ReferenceReview] = [],
         relations: [ReferenceRelation] = [],
         tags: ReferenceTagSet = ReferenceTagSet()
     ) {
@@ -41,6 +43,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
         self.channel = channel
         self.abstract = abstract
         self.notes = notes
+        self.reviews = reviews
         self.relations = relations
         self.tags = tags
     }
@@ -57,6 +60,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
         channel: ReferenceChannel = .unknown,
         abstract: ReferenceTextBlock? = nil,
         notes: [ReferenceTextBlock] = [],
+        reviews: [ReferenceReview] = [],
         relations: [ReferenceRelation] = [],
         tags: ReferenceTagSet = ReferenceTagSet()
     ) {
@@ -74,6 +78,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
             channel: channel,
             abstract: abstract,
             notes: notes,
+            reviews: reviews,
             relations: relations,
             tags: tags
         )
@@ -91,6 +96,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
         channel: ReferenceChannel = .unknown,
         abstract: ReferenceTextBlock? = nil,
         notes: [ReferenceTextBlock] = [],
+        reviews: [ReferenceReview] = [],
         relations: [ReferenceRelation] = [],
         tags: ReferenceTagSet = ReferenceTagSet()
     ) {
@@ -106,6 +112,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
             channel: channel,
             abstract: abstract,
             notes: notes,
+            reviews: reviews,
             relations: relations,
             tags: tags
         )
@@ -123,6 +130,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
         channel: ReferenceChannel = .unknown,
         abstract: ReferenceTextBlock? = nil,
         notes: [ReferenceTextBlock] = [],
+        reviews: [ReferenceReview] = [],
         relations: [ReferenceRelation] = [],
         tags: ReferenceTagSet = ReferenceTagSet()
     ) {
@@ -138,6 +146,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
             channel: channel,
             abstract: abstract,
             notes: notes,
+            reviews: reviews,
             relations: relations,
             tags: tags
         )
@@ -155,6 +164,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
         channel: ReferenceChannel = .unknown,
         abstract: ReferenceTextBlock? = nil,
         notes: [ReferenceTextBlock] = [],
+        reviews: [ReferenceReview] = [],
         relations: [ReferenceRelation] = [],
         tags: ReferenceTagSet = ReferenceTagSet()
     ) {
@@ -170,6 +180,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
             channel: channel,
             abstract: abstract,
             notes: notes,
+            reviews: reviews,
             relations: relations,
             tags: tags
         )
@@ -183,6 +194,9 @@ public struct ReferenceData: Sendable, Codable, Hashable {
         doi: String? = nil,
         kind: ReferenceKind = .other,
         channel: ReferenceChannel = .unknown,
+        notes: [ReferenceTextBlock] = [],
+        reviews: [ReferenceReview] = [],
+        relations: [ReferenceRelation] = [],
         tags: ReferenceTagSet = ReferenceTagSet()
     ) {
         self.init(
@@ -197,6 +211,9 @@ public struct ReferenceData: Sendable, Codable, Hashable {
             doi: doi,
             kind: kind,
             channel: channel,
+            notes: notes,
+            reviews: reviews,
+            relations: relations,
             tags: tags
         )
     }
@@ -282,6 +299,7 @@ public struct ReferenceData: Sendable, Codable, Hashable {
         terms.append(contentsOf: dates.searchTerms)
         terms.append(contentsOf: container?.searchTerms ?? [])
         terms.append(contentsOf: notes.flatMap(\.searchTerms))
+        terms.append(contentsOf: reviews.flatMap(\.searchTerms))
         terms.append(contentsOf: relations.flatMap(\.searchTerms))
         terms.append(contentsOf: tags.searchTerms)
 

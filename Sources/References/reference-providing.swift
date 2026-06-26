@@ -34,6 +34,7 @@ where RawValue == String {
     var abstract: ReferenceTextBlock? { get }
     var abstractText: String? { get }
     var notes: [ReferenceTextBlock] { get }
+    var reviews: [ReferenceReview] { get }
     var relations: [ReferenceRelation] { get }
     var tags: ReferenceTagSet { get }
     var recencySortKey: Int? { get }
@@ -135,6 +136,10 @@ public extension ReferenceProviding {
 
     var notes: [ReferenceTextBlock] {
         data.notes
+    }
+
+    var reviews: [ReferenceReview] {
+        data.reviews
     }
 
     var relations: [ReferenceRelation] {
