@@ -21,6 +21,7 @@ public struct ReferenceReviewEntry: Sendable, Codable, Hashable, Identifiable {
             id,
             kind.rawValue,
             kind.label,
+            kind.dutch,
             title,
         ]
         .compactMap { $0 }
