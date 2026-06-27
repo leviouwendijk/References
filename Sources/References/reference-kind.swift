@@ -8,6 +8,11 @@ public enum ReferenceKind: String, Sendable, Codable, Hashable, CaseIterable {
     case guideline
     case position_statement
     case report
+    case legislation
+    case regulation
+    case standard
+    case technical_specification
+    case product_catalogue
     case dataset
     case webpage
     case video

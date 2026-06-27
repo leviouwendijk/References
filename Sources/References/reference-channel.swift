@@ -5,6 +5,7 @@ public enum ReferenceChannel: String, Sendable, Codable, Hashable, CaseIterable 
     case textbook
     case professional
     case institutional
+    case industry
     case popular
     case internal_note
     case unknown
